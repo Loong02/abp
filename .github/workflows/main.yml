@@ -1,0 +1,18 @@
+name: Daily Fork
+ 
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天午夜运行，你可以根据需要调整cron表达式
+ 
+jobs:
+  fork:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Fork repository
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        title: 'Daily Fork'
+        body: 'This pull request is automatically created by GitHub Actions to keep track of the upstream repository.'
+        fork: true
+        upstream: 'user/repo' # 替换为你想要fork的仓库
